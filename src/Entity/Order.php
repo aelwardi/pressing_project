@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\OrderStatusEnum;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,9 +20,6 @@ class Order
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
 
     #[ORM\Column]
     private ?float $totalPrice = null;
@@ -53,6 +51,9 @@ class Order
     #[ORM\OneToMany(targetEntity: OrderReceipt::class, mappedBy: 'order')]
     private Collection $orderReceipt;
 
+    #[ORM\Column(enumType: OrderStatusEnum::class)]
+    private ?OrderStatusEnum $status = null;
+
     public function __construct()
     {
         $this->orderItem = new ArrayCollection();
@@ -72,18 +73,6 @@ class Order
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
 
         return $this;
     }
@@ -216,6 +205,18 @@ class Order
                 $orderReceipt->setOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?OrderStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(OrderStatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

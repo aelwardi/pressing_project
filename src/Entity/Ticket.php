@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\TicketStatusEnum;
 use App\Repository\TicketRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,9 +29,6 @@ class Ticket
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $closedAt = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
-
     #[ORM\ManyToOne(inversedBy: 'ticket')]
     private ?User $user = null;
 
@@ -39,6 +37,9 @@ class Ticket
      */
     #[ORM\OneToMany(targetEntity: TicketMessage::class, mappedBy: 'ticket')]
     private Collection $ticketMessage;
+
+    #[ORM\Column(enumType: TicketStatusEnum::class)]
+    private ?TicketStatusEnum $status = null;
 
     public function __construct()
     {
@@ -98,18 +99,6 @@ class Ticket
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -148,6 +137,18 @@ class Ticket
                 $ticketMessage->setTicket(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?TicketStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(TicketStatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

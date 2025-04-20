@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\MediaTypeEnum;
 use App\Repository\MediaFileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,6 +25,15 @@ class MediaFile
 
     #[ORM\ManyToOne(inversedBy: 'mediaFile')]
     private ?Service $service = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(enumType: MediaTypeEnum::class)]
+    private ?MediaTypeEnum $mediaType = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $fileURL = null;
 
     public function getId(): ?int
     {
@@ -74,6 +84,42 @@ class MediaFile
     public function setService(?Service $service): static
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getMediaType(): ?MediaTypeEnum
+    {
+        return $this->mediaType;
+    }
+
+    public function setMediaType(MediaTypeEnum $mediaType): static
+    {
+        $this->mediaType = $mediaType;
+
+        return $this;
+    }
+
+    public function getFileURL(): ?string
+    {
+        return $this->fileURL;
+    }
+
+    public function setFileURL(string $fileURL): static
+    {
+        $this->fileURL = $fileURL;
 
         return $this;
     }

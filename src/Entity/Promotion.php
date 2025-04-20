@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\PromotionStatusEnum;
 use App\Repository\PromotionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,9 +31,6 @@ class Promotion
     private ?float $discount = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $promoCode = null;
 
     #[ORM\Column(length: 255)]
@@ -40,6 +38,9 @@ class Promotion
 
     #[ORM\ManyToOne(inversedBy: 'promotion')]
     private ?Service $service = null;
+
+    #[ORM\Column(enumType: PromotionStatusEnum::class)]
+    private ?PromotionStatusEnum $status = null;
 
     public function getId(): ?int
     {
@@ -106,18 +107,6 @@ class Promotion
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getPromoCode(): ?string
     {
         return $this->promoCode;
@@ -150,6 +139,18 @@ class Promotion
     public function setService(?Service $service): static
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    public function getStatus(): ?PromotionStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(PromotionStatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

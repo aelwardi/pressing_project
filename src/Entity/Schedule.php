@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\ScheduleStatusEnum;
 use App\Repository\ScheduleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,11 +27,11 @@ class Schedule
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
-
     #[ORM\ManyToOne(inversedBy: 'schedule')]
     private ?Pressing $pressing = null;
+
+    #[ORM\Column(enumType: ScheduleStatusEnum::class)]
+    private ?ScheduleStatusEnum $status = null;
 
     public function getId(): ?int
     {
@@ -85,18 +86,6 @@ class Schedule
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getPressing(): ?Pressing
     {
         return $this->pressing;
@@ -105,6 +94,18 @@ class Schedule
     public function setPressing(?Pressing $pressing): static
     {
         $this->pressing = $pressing;
+
+        return $this;
+    }
+
+    public function getStatus(): ?ScheduleStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(ScheduleStatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
