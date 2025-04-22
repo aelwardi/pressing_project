@@ -1,0 +1,33 @@
+App\Entity\Category:
+    category_chemise:
+        name: 'Chemise'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'
+    category_pantalon:
+        name: 'Pantalon'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'
+    category_costume:
+        name: 'Costume'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'
+    category_robe:
+        name: 'Robe'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'
+    category_chaussure:
+        name: 'Chaussure'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'
+    category_manteau:
+        name: 'Manteau'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'
+    category_tapis:
+        name: 'Tapis'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'
+    category_veste:
+        name: 'Veste'
+        description: '<realText(100)>'
+        pressing: '@pressing_paris'

@@ -1,0 +1,9 @@
+App\Entity\Product:
+    product_{1..20}:
+        name: '<word()>'
+        supplierName: '<company()>'
+        description: '<sentence()>'
+        purchasePrice: '<randomFloat(2, 5, 50)>'
+        salePrice: '<randomFloat(2, 10, 100)>'
+        stockQuantity: '<numberBetween(10, 100)>'
+        pressing: '@pressing_paris'

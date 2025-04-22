@@ -1,0 +1,9 @@
+App\Entity\Pressing:
+    pressing_paris:
+        name: 'Pressing ESGI Paris'
+        createdAt: '<dateTime()>'
+        taxNumber: '<numberBetween(9999885, 66564546566)>'
+        description: '<realText(100)>'
+        siteWeb: 'https://<domainName()>'
+        phone: '<phoneNumber()>'
+        email: '<companyEmail()>'
